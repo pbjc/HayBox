@@ -133,9 +133,14 @@ void setup() {
         backends = new CommunicationBackend *[backend_count] { primary_backend };
     }
 
+    Melee20ButtonOptions meleeOptions = { .crouch_walk_os = true };
+    if (button_holds.down) {
+        meleeOptions = { .crouch_walk_os = false };
+    }
+
     // Default to Melee mode.
     primary_backend->SetGameMode(
-        new Melee20Button(socd::SOCD_2IP_NO_REAC, { .crouch_walk_os = false })
+        new Melee20Button(socd::SOCD_2IP_NO_REAC, meleeOptions)
     );
 }
 
